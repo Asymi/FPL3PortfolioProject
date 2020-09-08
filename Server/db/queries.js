@@ -2,9 +2,11 @@
 const indexForDay = `SELECT * FROM habit_instance JOIN habit_overview ON habit_instance.habit_id = habit_overview.habit_id WHERE habit_overview.userid = $1 AND habit_instance.date = TO_DATE($2,'YYYY-MM-DD')`;
 
 // Select a single habit from the table of habits
-const show = `SELECT * FROM habit_overview WHERE habit_id = $1`;
+//const show = `SELECT * FROM habit_overview WHERE habit_id = $1`;
+const show = `SELECT * FROM habit_overview WHERE habit_id = $1 AND userid = $2`;
+
 // Show weekly/ monthly
-const showByFrequency = `SELECT * FROM habit_overview WHERE frequency = $1`;
+const showByFrequency = `SELECT * FROM habit_overview WHERE frequency = $1 AND userid = $2`;
 
 // const show = `SELECT * FROM habit_overview WHERE frequency = $1`;
 // Create a habit for a user in the habit_overview table

@@ -5,13 +5,10 @@ const { setInterval, dateArray } = require('./helpers')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/:userid/dashboard', (req, res) => {
     const date = new Date().toISOString().slice(0, 10);
-    
-    // This should be retrieved after the user logs in and saved - maybe a function to to this? I.e. while a user is logged in, all API calls are made with their userI
-    const userID = 1;
    
-    db.run(indexForDay, [userID, date])
+    db.run(indexForDay, [req.params.userid, date])
     .then(resp => {
         const habits = resp.rows
         res.json({habits})
@@ -19,9 +16,10 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).end())
 });
 
+
 //show one habit route
-router.get('/:id', (req,res) => {
-    db.run(show, [req.params.id])
+router.get('/:userid/:id', (req,res) => {
+    db.run(show, [req.params.id, req.params.userid])
         .then(resp => {
             const habit = resp.rows
             res.json({habit})
@@ -30,15 +28,37 @@ router.get('/:id', (req,res) => {
 })
 
 
-//show habit by freuquency route
+// //show one habit route
+// router.get('/:id', (req,res) => {
+//     db.run(show, [req.params.id])
+//         .then(resp => {
+//             const habit = resp.rows
+//             res.json({habit})
+//         })
+//         .catch(err=> res.status(500).end())
+// })
+
+
+//show habit by frequency route
 router.get('/frequency/:id', (req,res) => {
-    db.run(showByFrequency, [req.params.id])
+    db.run(showByFrequency, [req.params.id, userID])
         .then(resp => {
             const habit = resp.rows[0]
             res.json({habit})
         })
         .catch(err => res.status(500).end())
 })
+
+
+// //show habit by frequency route
+// router.get('/frequency/:id', (req,res) => {
+//     db.run(showByFrequency, [req.params.id, userID])
+//         .then(resp => {
+//             const habit = resp.rows[0]
+//             res.json({habit})
+//         })
+//         .catch(err => res.status(500).end())
+// })
 
 // Create new habit
 router.post('/', (req, res) => {
