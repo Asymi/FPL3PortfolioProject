@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('../db/config');
-const { indexForDay, show, createHabit, createHabitInstances, update, destroy } = require('../db/queries');
+const { indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitOverview, deleteHabitInstance } = require('../db/queries');
+const { setInterval, dateArray } = require('./helpers')
 
 const router = express.Router();
 
@@ -25,7 +26,18 @@ router.get('/:id', (req,res) => {
             const habit = resp.rows
             res.json({habit})
         })
-        .catch(err=> res.status(50).end())
+        .catch(err=> res.status(500).end())
+})
+
+
+//show habit by freuquency route
+router.get('/frequency/:id', (req,res) => {
+    db.run(showByFrequency, [req.params.id])
+        .then(resp => {
+            const habit = resp.rows[0]
+            res.json({habit})
+        })
+        .catch(err => res.status(500).end())
 })
 
 // Create new habit
@@ -47,45 +59,26 @@ const popHabIns = (habitID, startDate, endDate, frequency) => {
     datesArr.map(date => db.run(createHabitInstances, [habitID, date]))
 }
 
-//Function to set interval between dates
-const setInterval = (frequency) => {
-    if (frequency.toLowerCase() === 'daily'){
-        return 1;
-    } else if (frequency.toLowerCase() === 'weekly'){
-        return 7;
-    } else if (frequency.toLowerCase() === 'fortnightly'){
-        return 14;
-    } else if (frequency.toLowerCase() === 'monthly'){
-        return 30;
-    }
-}
-
-// Functiont o generate an array of dates
-const dateArray = function(start, end, interval) {
-    const datesArr = [];
-    const varDate = new Date(start);
-    const endDate = new Date(end);
-    while (varDate <= endDate) {
-        datesArr.push(new Date(varDate));
-        varDate.setDate(varDate.getDate() + interval);
-    }
-    datesArr.map(date => date.toISOString().slice(0, 10));
-    return datesArr
-}
-
 //Update a habit as completed
 router.put('/:id', (req,res) => {
     db.run(update, [req.params.id, req.body.date])
-    .then(res.status(204))
+    .then(resp => {
+        res.status(204).json({ message: "Habit updated" })
+    })
     .catch(err => res.status(500).end())
 })
 
 //Delete habit route
 router.delete('/:id', (req, res) => {
-    db.run(destroy, [req.params.id])
-        .then(res.status(204))
-        .catch(err => res.status(500).end())
+    db.run(deleteHabitInstance, [parseInt(req.params.id)])
+    db.run(deleteHabitOverview, [parseInt(req.params.id)])
+    .then(resp => {
+        res.status(204).json({ message: "Habit deleted"})
+    })
+    .catch(err => res.status(500).end())
 })
+
+
 
 
 module.exports = router;
