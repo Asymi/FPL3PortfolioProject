@@ -18,7 +18,7 @@ router.get('/:userid/dashboard', (req, res) => {
 
 
 //show one habit route
-router.get('/:userid/:id', (req,res) => {
+router.get('/:userid/show/:id', (req,res) => {
     db.run(show, [req.params.id, req.params.userid])
         .then(resp => {
             const habit = resp.rows
@@ -28,20 +28,9 @@ router.get('/:userid/:id', (req,res) => {
 })
 
 
-// //show one habit route
-// router.get('/:id', (req,res) => {
-//     db.run(show, [req.params.id])
-//         .then(resp => {
-//             const habit = resp.rows
-//             res.json({habit})
-//         })
-//         .catch(err=> res.status(500).end())
-// })
-
-
 //show habit by frequency route
-router.get('/frequency/:id', (req,res) => {
-    db.run(showByFrequency, [req.params.id, userID])
+router.get('/:userid/daily', (req,res) => {
+    db.run(showByFrequency, ['Daily', req.params.userid])
         .then(resp => {
             const habit = resp.rows[0]
             res.json({habit})
@@ -49,16 +38,26 @@ router.get('/frequency/:id', (req,res) => {
         .catch(err => res.status(500).end())
 })
 
+//show habit by frequency route
+router.get('/:userid/weekly', (req,res) => {
+    db.run(showByFrequency, ['Weekly', req.params.userid])
+        .then(resp => {
+            const habit = resp.rows[0]
+            res.json({habit})
+        })
+        .catch(err => res.status(500).end())
+})
 
-// //show habit by frequency route
-// router.get('/frequency/:id', (req,res) => {
-//     db.run(showByFrequency, [req.params.id, userID])
-//         .then(resp => {
-//             const habit = resp.rows[0]
-//             res.json({habit})
-//         })
-//         .catch(err => res.status(500).end())
-// })
+//show habit by frequency route
+router.get('/:userid/monthly', (req,res) => {
+    db.run(showByFrequency, ['Monthly', req.params.userid])
+        .then(resp => {
+            const habit = resp.rows[0]
+            res.json({habit})
+        })
+        .catch(err => res.status(500).end())
+})
+
 
 // Create new habit
 router.post('/', (req, res) => {
@@ -80,7 +79,7 @@ const popHabIns = (habitID, startDate, endDate, frequency) => {
 }
 
 //Update a habit as completed
-router.put('/:id', (req,res) => {
+router.put('/:userid/:id', (req,res) => {
     db.run(update, [req.params.id, req.body.date])
     .then(resp => {
         res.status(204).json({ message: "Habit updated" })
@@ -89,7 +88,7 @@ router.put('/:id', (req,res) => {
 })
 
 //Delete habit route
-router.delete('/:id', (req, res) => {
+router.delete('/:userid/:id', (req, res) => {
     db.run(deleteHabitInstance, [parseInt(req.params.id)])
     db.run(deleteHabitOverview, [parseInt(req.params.id)])
     .then(resp => {

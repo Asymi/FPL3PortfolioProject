@@ -2,8 +2,8 @@
 const indexForDay = `SELECT * FROM habit_instance JOIN habit_overview ON habit_instance.habit_id = habit_overview.habit_id WHERE habit_overview.userid = $1 AND habit_instance.date = TO_DATE($2,'YYYY-MM-DD')`;
 
 // Select a single habit from the table of habits
-//const show = `SELECT * FROM habit_overview WHERE habit_id = $1`;
 const show = `SELECT * FROM habit_overview WHERE habit_id = $1 AND userid = $2`;
+// Change to showsingle, and make showall
 
 // Show weekly/ monthly
 const showByFrequency = `SELECT * FROM habit_overview WHERE frequency = $1 AND userid = $2`;
@@ -15,6 +15,7 @@ const createHabit = `INSERT INTO habit_overview (habit, frequency, startdate, en
 const createHabitInstances = `INSERT INTO habit_instance (habit_id, date, status) VALUES ($1, $2, false)`
 
 // Change status from false to true for a chosen habit_id if the date of the row is equal to the date specified by the user (which will be today's)
+// Habit id's are unique, even when deleted, so it is not necessary to specify a user's id in addition to a habit id
 const update = `UPDATE habit_instance SET status = true WHERE habit_id = $1 AND habit_instance.date = TO_DATE($2,'YYYY-MM-DD')`;
 
 const deleteHabitInstance = `DELETE FROM habit_instance WHERE habit_id = $1 RETURNING habit_id` 
