@@ -13,6 +13,6 @@ const update = `UPDATE habit_instance SET status = true WHERE habit_id = $1 AND 
 const destroy = `DELETE FROM habit_overview WHERE habit_id = $1; DELETE FROM habit_instance WHERE habit_id = $1`;
 
 const getUserByEmail = `SELECT * FROM users WHERE username = $1`;
-const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING userid`;
+const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *`;
 
 module.exports = {indexForDay, show, createHabit, createHabitInstances, update, destroy, getUserByEmail, insertUser};

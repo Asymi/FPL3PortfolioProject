@@ -32,9 +32,7 @@ router.post('/signup', (req, res, next) => {
         } else {
           next(new Error('Username already taken!'))
         }
-
       })
-
   } else {
     next(new Error('Invalid User'));
   }
