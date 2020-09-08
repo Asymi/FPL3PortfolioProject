@@ -39,6 +39,7 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
+  console.log(req.body)
   if(validateUser(req.body)) {
     db.run(getUserByEmail, [req.body.username])
       .then(resp => {
