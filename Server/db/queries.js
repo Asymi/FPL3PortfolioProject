@@ -21,5 +21,9 @@ const update = `UPDATE habit_instance SET status = true WHERE habit_id = $1 AND 
 const deleteHabitInstance = `DELETE FROM habit_instance WHERE habit_id = $1 RETURNING habit_id` 
 const deleteHabitOverview = `DELETE FROM habit_overview WHERE habit_id = $1 RETURNING habit_id`;
 
+const getUserByEmail = `SELECT * FROM users WHERE username = $1`;
+const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *`;
 
-module.exports = {indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitInstance, deleteHabitOverview};
+
+module.exports = {indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitInstance, deleteHabitOverview, getUserByEmail, insertUser};
+

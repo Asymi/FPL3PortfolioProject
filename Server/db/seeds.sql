@@ -7,7 +7,6 @@ CREATE TABLE users(
     userid SERIAL,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(1024) NOT NULL,
-    email VARCHAR(255) NOT NULL,
     PRIMARY KEY(userid)
 );
 
@@ -19,7 +18,7 @@ CREATE TABLE habit_overview(
     enddate DATE NOT NULL,
     userid INT NOT NULL,
     PRIMARY KEY(habit_id),
-    FOREIGN KEY (userid) REFERENCES users(userid)  
+    FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
 CREATE TABLE habit_instance(
@@ -29,11 +28,10 @@ CREATE TABLE habit_instance(
     status BOOLEAN DEFAULT false
 );
 
-INSERT INTO users(username, password, email)
+INSERT INTO users(username, password)
 VALUES(
     'projectuser',
-    'projectpass',
-    'user@project.com'
+    'projectpass'
 );
 
 INSERT INTO habit_overview (userid, habit, frequency, startdate, enddate)
