@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const server = express();
 server.use(cors());
 server.use(express.json());
-server.use(cookieParser());
+server.use(cookieParser('keyboard_cat'));
 
 const port = 3000;
 
