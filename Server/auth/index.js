@@ -36,7 +36,14 @@ router.post('/signup', (req, res, next) => {
   } else {
     next(new Error('Invalid User'));
   }
+})
 
+router.post('/login', (req, res) => {
+  if(validateUser(req.body)) {
+    db.run()
+  } else {
+
+  }
 })
 
 module.exports = router;
