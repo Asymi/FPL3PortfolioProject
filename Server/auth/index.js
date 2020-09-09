@@ -39,7 +39,6 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-  console.log(req.body)
   if(validateUser(req.body)) {
     db.run(getUserByEmail, [req.body.username])
       .then(resp => {
@@ -47,20 +46,14 @@ router.post('/login', (req, res, next) => {
           bcrypt.compare(req.body.password, resp.rows[0].password)
             .then((result) => {
               if(result) {
-                console.log(resp.rows[0])
-                res.cookie('user_id', resp.rows[0].userid, {
-                  httpOnly: true,
-                  signed: true
-                  // secure: true
-                })
                 res.json({
-                  message: 'Logged in! 🔓'
+                  user_id: resp.rows[0].userid,
+                  message: 'Logged in! :unlock:'
                 })
               } else {
                 next(new Error('Wrong password'))
               }
             })
-
         } else {
           next(new Error('Username not found'))
         }
@@ -69,5 +62,6 @@ router.post('/login', (req, res, next) => {
     next(new Error('Invalid Login'))
   }
 })
+
 
 module.exports = router;
