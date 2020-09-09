@@ -11,6 +11,8 @@ export class LandingPage extends Component {
                     <NavLink to="/login"><button>Login</button></NavLink>
                 </header>
                 <div id="grid-container">
+
+				</div>
 				{/* Hero Section containing two buttons */}
                 <div id="grid-item1">
                     
@@ -34,7 +36,7 @@ export class LandingPage extends Component {
                 <div id="grid-item5">
 
                 </div>
-                </div>
+            </div>
         )
     }
 }
