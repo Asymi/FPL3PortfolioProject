@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import registerUser from '../../Actions/registerUser';
+import { connect } from 'react-redux';
 
 export class Login extends Component {
     state = {
@@ -19,15 +21,34 @@ export class Login extends Component {
             password: this.state.user.password
         }
 
-        fetch('http://localhost:3000/auth/login', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'no-cors',
+        // fetch('http://localhost:3000/auth/login', {
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     mode: 'no-cors',
+        //     method: 'POST',
+        //     body: JSON.stringify(userData)
+        // })
+        
+        // .then(resp => console.log(resp))
+        // .then(resp.name => this.props.setUsername(resp.name))
+        // .catch(err => console.log(err))
+        const options = {
+            headers: { "Content-Type": "application/json"},
             method: 'POST',
             body: JSON.stringify(userData)
+        }
+
+        fetch('http://localhost:3000/auth/login', options)
+        .then(resp => resp.json())
+        .then(resp => {
+            this.props.setUserId(resp.user_id)
+            return resp})
+        .then(data => {
+            if(data.user_id){
+                this.props.history.push('/dashboard')
+            }
         })
-        .then(resp => console.log(resp))
         .catch(err => console.log(err))
     }
     
@@ -44,4 +65,8 @@ export class Login extends Component {
     }
 }
 
-export default Login
+const mDTP = dispatch => ({
+    setUserId: (userid) => dispatch(registerUser(userid))
+})
+
+export default connect(null, mDTP)(Login)
