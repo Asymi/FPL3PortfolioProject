@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { getHabits } from '../../Actions/actions';
+import { updateStatus, destroyHabit } from '../../Actions/actions';
 
 export class DisplayHabit extends Component {
+    updateStatus = () => {
+      this.props.tickHabit(this.props.info)
+    }
+    removeHabit = () => {
+      this.props.deleteHabit(this.props.info)
+    }
     render() {
         return (
             <div>
-              {this.props.habits ? this.props.habits.map((item, index) => (
-
-                  <div key={index}>
-                    <p>{item.habit}</p>
-                  </div>
-
-              )) : "Loading..."}
+              <p>{this.props.info.habit}</p>
+              <button onClick={this.updateStatus}>{this.props.info.status ? "Complete" : "Incomplete"}</button>
+              <button onClick={this.removeHabit}>Delete</button>
             </div>
         )
     }
 }
 
 const mSTP = state => ({
-  userId: state.userid,
-  habits: state.dailyHabits.habits
+  userId: state.userid
 })
 
-// const mDTP = dispatch => {
-//   getHabits: userId => dispatch(getHabits(userId))
-// }
+const mDTP = dispatch => ({
+  tickHabit: habitInfo => dispatch(updateStatus(habitInfo)),
+  deleteHabit: habitInfo => dispatch(destroyHabit(habitInfo))
+})
 
-export default connect(mSTP)(DisplayHabit);
+export default connect(mSTP, mDTP)(DisplayHabit);
