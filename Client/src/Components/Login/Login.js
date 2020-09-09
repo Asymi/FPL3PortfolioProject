@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import registerUser from '../../Actions/registerUser';
+import { getHabits } from '../../Actions/actions';
 import { connect } from 'react-redux';
 
 export class Login extends Component {
     state = {
         user: {}
     };
-    
-    
+
+
     handleInput = e => {
         let user = this.state.user;
         user[e.target.name] = e.target.value;
         this.setState({user});
     }
-    
+
     handleSubmit = (e) => {
         e.preventDefault()
         const userData = {
@@ -31,30 +32,37 @@ export class Login extends Component {
         .then(resp => resp.json())
         .then(resp => {
             this.props.setUserId(resp.user_id)
+            this.props.fetchHabits(resp.user_id)
             return resp})
         .then(data => {
             if(data.user_id){
                 this.props.history.push('/dashboard')
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => alert('Invalid Login'))
     }
-    
+
     render() {
         return (
             <div>
+              <h1>Log In</h1>
               <form onSubmit={this.handleSubmit}>
-                  <input type="text" name="username" onChange={this.handleInput}></input>
-                  <input type="password" name="password" onChange={this.handleInput}></input>
+
+                <label for="username">Username</label>
+                  <input type="text" name="username" onChange={this.handleInput}></input><br/>
+                <label for="username">Password</label>
+                  <input type="password" name="password" onChange={this.handleInput}></input><br/>
+
                   <input type="submit"></input>
-                </form>  
+                </form>
             </div>
         )
     }
 }
 
 const mDTP = dispatch => ({
-    setUserId: (userid) => dispatch(registerUser(userid))
+    setUserId: (userid) => dispatch(registerUser(userid)),
+    fetchHabits: (userid) => dispatch(getHabits(userid))
 })
 
 export default connect(null, mDTP)(Login)

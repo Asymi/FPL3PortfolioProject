@@ -13,6 +13,7 @@ function Dashboard (props) {
                 <div className="Dashboard">
                     <h1>Hello Dashboard</h1>
                     <button onClick={()=>{setModalIsOpen(true)}}>+</button>
+                    <DisplayHabit />
                     <Modal isOpen={modalIsOpen} onRequestClose={()=>setModalIsOpen(false)}>
                         <h2>Modal up</h2>
                         <AddHabit closeModal={()=>setModalIsOpen(false)}/>
@@ -30,4 +31,3 @@ function Dashboard (props) {
 
 const mSTP = state => ({ userid: state.userid})
 export default connect(mSTP)(Dashboard)
-
