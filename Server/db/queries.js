@@ -16,9 +16,9 @@ const createHabitInstances = `INSERT INTO habit_instance (habit_id, date, status
 
 // Change status from false to true for a chosen habit_id if the date of the row is equal to the date specified by the user (which will be today's)
 // Habit id's are unique, even when deleted, so it is not necessary to specify a user's id in addition to a habit id
-const update = `UPDATE habit_instance SET status = true WHERE habit_id = $1 AND habit_instance.date = TO_DATE($2,'YYYY-MM-DD')`;
+const update = `UPDATE habit_instance SET status = NOT status WHERE habit_id = $1 AND habit_instance.date = TO_DATE($2,'YYYY-MM-DD')`;
 
-const deleteHabitInstance = `DELETE FROM habit_instance WHERE habit_id = $1 RETURNING habit_id` 
+const deleteHabitInstance = `DELETE FROM habit_instance WHERE habit_id = $1 RETURNING habit_id`
 const deleteHabitOverview = `DELETE FROM habit_overview WHERE habit_id = $1 RETURNING habit_id`;
 
 const getUserByEmail = `SELECT * FROM users WHERE username = $1`;
@@ -26,4 +26,3 @@ const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETUR
 
 
 module.exports = {indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitInstance, deleteHabitOverview, getUserByEmail, insertUser};
-

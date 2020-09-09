@@ -4,14 +4,17 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const server = express();
-server.use(cors());
+server.use(cors({
+  origin: 'http://localhost:8000/',
+  credentials: true
+}));
 server.use(express.json());
-server.use(cookieParser('keyboard_cat'));
+server.use(cookieParser());
 
 const port = 3000;
 
 const habitRoutes = require('./routes/habits');
-const auth = require('./auth/index')
+const auth = require('./auth/index');
 
 server.use('/habits', habitRoutes);
 server.use('/auth', auth);
