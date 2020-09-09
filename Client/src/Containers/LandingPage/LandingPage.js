@@ -10,27 +10,31 @@ export class LandingPage extends Component {
                     <NavLink to="/signup"><button>Sign Up</button></NavLink>
                     <NavLink to="/login"><button>Login</button></NavLink>
                 </header>
-
+                <div id="grid-container">
 				{/* Hero Section containing two buttons */}
-                <div id="wrapper">
+                <div id="grid-item1">
                     
                 </div>
 				{/* How it works section containing instructions */}
-                <div id="wrapper1">
+                <div id="grid-item2">
 
 				</div>
 
 				{/* Why it works section with statistics */}
-                <div id="wrapper2">
+                <div id="grid-item3">
 
 				</div>
 
 				{/* Testimonials/reviews section with cards */}
-                <div id="wrapper3">
+                <div id="grid-item4">
 
         		</div>
 			
 				{/* Footer with contact information */}
+                <div id="grid-item5">
+
+                </div>
+                </div>
         )
     }
 }
