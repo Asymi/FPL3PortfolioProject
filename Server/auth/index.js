@@ -46,20 +46,14 @@ router.post('/login', (req, res, next) => {
           bcrypt.compare(req.body.password, resp.rows[0].password)
             .then((result) => {
               if(result) {
-                console.log(resp.rows[0])
-                res.cookie('user_id', resp.rows[0].userid, {
-                  httpOnly: true,
-                  signed: true
-                  // secure: true
-                })
                 res.json({
+                  user_id: resp.rows[0].userid,
                   message: 'Logged in! 🔓'
                 })
               } else {
                 next(new Error('Wrong password'))
               }
             })
-
         } else {
           next(new Error('Username not found'))
         }
