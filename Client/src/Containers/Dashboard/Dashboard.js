@@ -15,7 +15,7 @@ function Dashboard (props) {
                     <button onClick={()=>{setModalIsOpen(true)}}>+</button>
                     <Modal isOpen={modalIsOpen} onRequestClose={()=>setModalIsOpen(false)}>
                         <h2>Modal up</h2>
-                        <AddHabit/>
+                        <AddHabit closeModal={()=>setModalIsOpen(false)}/>
                         <div>
                             <button onClick={()=>setModalIsOpen(false)}>Close</button>
                         </div>
