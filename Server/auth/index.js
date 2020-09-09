@@ -48,7 +48,7 @@ router.post('/login', (req, res, next) => {
               if(result) {
                 res.json({
                   user_id: resp.rows[0].userid,
-                  message: 'Logged in! 🔓'
+                  message: 'Logged in! :unlock:'
                 })
               } else {
                 next(new Error('Wrong password'))
@@ -62,5 +62,6 @@ router.post('/login', (req, res, next) => {
     next(new Error('Invalid Login'))
   }
 })
+
 
 module.exports = router;
