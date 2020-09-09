@@ -22,18 +22,6 @@ export class Login extends Component {
             password: this.state.user.password
         }
 
-        // fetch('http://localhost:3000/auth/login', {
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     mode: 'no-cors',
-        //     method: 'POST',
-        //     body: JSON.stringify(userData)
-        // })
-
-        // .then(resp => console.log(resp))
-        // .then(resp.name => this.props.setUsername(resp.name))
-        // .catch(err => console.log(err))
         const options = {
             headers: { "Content-Type": "application/json"},
             method: 'POST',
@@ -59,10 +47,12 @@ export class Login extends Component {
             <div>
               <h1>Log In</h1>
               <form onSubmit={this.handleSubmit}>
+
                 <label for="username">Username</label>
                   <input type="text" name="username" onChange={this.handleInput}></input><br/>
                 <label for="username">Password</label>
                   <input type="password" name="password" onChange={this.handleInput}></input><br/>
+
                   <input type="submit"></input>
                 </form>
             </div>
