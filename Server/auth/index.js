@@ -25,6 +25,7 @@ router.post('/signup', (req, res, next) => {
                 .then(user => {
                   console.log(user.rows)
                   res.json({
+                    status: 201,
                     message: "✅"
                   })
                 })
@@ -46,16 +47,14 @@ router.post('/login', (req, res, next) => {
           bcrypt.compare(req.body.password, resp.rows[0].password)
             .then((result) => {
               if(result) {
-                console.log(resp.rows[0])
-                res.cookie('user_id', resp.rows[0].userid)
                 res.json({
-                  message: 'Logged in! 🔓'
+                  user_id: resp.rows[0].userid,
+                  message: 'Logged in! :unlock:'
                 })
               } else {
                 next(new Error('Wrong password'))
               }
             })
-
         } else {
           next(new Error('Username not found'))
         }
@@ -64,5 +63,6 @@ router.post('/login', (req, res, next) => {
     next(new Error('Invalid Login'))
   }
 })
+
 
 module.exports = router;

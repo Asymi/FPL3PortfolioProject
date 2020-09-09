@@ -1,16 +1,14 @@
 const express = require('express');
 const db = require('../db/config');
-const { indexForDay, show, createHabit, createHabitInstances, update, destroy } = require('../db/queries');
+const { indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitOverview, deleteHabitInstance } = require('../db/queries');
+const { setInterval, dateArray } = require('./helpers')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/:userid/dashboard', (req, res) => {
     const date = new Date().toISOString().slice(0, 10);
-    
-    // This should be retrieved after the user logs in and saved - maybe a function to to this? I.e. while a user is logged in, all API calls are made with their userI
-    const userID = 1;
    
-    db.run(indexForDay, [userID, date])
+    db.run(indexForDay, [req.params.userid, date])
     .then(resp => {
         const habits = resp.rows
         res.json({habits})
@@ -18,15 +16,48 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).end())
 });
 
+
 //show one habit route
-router.get('/:id', (req,res) => {
-    db.run(show, [req.params.id])
+router.get('/:userid/show/:id', (req,res) => {
+    db.run(show, [req.params.id, req.params.userid])
         .then(resp => {
             const habit = resp.rows
             res.json({habit})
         })
-        .catch(err=> res.status(50).end())
+        .catch(err=> res.status(500).end())
 })
+
+
+//show habit by frequency route
+router.get('/:userid/daily', (req,res) => {
+    db.run(showByFrequency, ['Daily', req.params.userid])
+        .then(resp => {
+            const habit = resp.rows[0]
+            res.json({habit})
+        })
+        .catch(err => res.status(500).end())
+})
+
+//show habit by frequency route
+router.get('/:userid/weekly', (req,res) => {
+    db.run(showByFrequency, ['Weekly', req.params.userid])
+        .then(resp => {
+            const habit = resp.rows[0]
+            res.json({habit})
+        })
+        .catch(err => res.status(500).end())
+})
+
+//show habit by frequency route
+router.get('/:userid/monthly', (req,res) => {
+    db.run(showByFrequency, ['Monthly', req.params.userid])
+        .then(resp => {
+            const habit = resp.rows[0]
+            res.json({habit})
+        })
+        .catch(err => res.status(500).end())
+})
+
 
 // Create new habit
 router.post('/', (req, res) => {
@@ -47,45 +78,26 @@ const popHabIns = (habitID, startDate, endDate, frequency) => {
     datesArr.map(date => db.run(createHabitInstances, [habitID, date]))
 }
 
-//Function to set interval between dates
-const setInterval = (frequency) => {
-    if (frequency.toLowerCase() === 'daily'){
-        return 1;
-    } else if (frequency.toLowerCase() === 'weekly'){
-        return 7;
-    } else if (frequency.toLowerCase() === 'fortnightly'){
-        return 14;
-    } else if (frequency.toLowerCase() === 'monthly'){
-        return 30;
-    }
-}
-
-// Functiont o generate an array of dates
-const dateArray = function(start, end, interval) {
-    const datesArr = [];
-    const varDate = new Date(start);
-    const endDate = new Date(end);
-    while (varDate <= endDate) {
-        datesArr.push(new Date(varDate));
-        varDate.setDate(varDate.getDate() + interval);
-    }
-    datesArr.map(date => date.toISOString().slice(0, 10));
-    return datesArr
-}
-
 //Update a habit as completed
-router.put('/:id', (req,res) => {
+router.put('/:userid/:id', (req,res) => {
     db.run(update, [req.params.id, req.body.date])
-    .then(res.status(204))
+    .then(resp => {
+        res.status(204).json({ message: "Habit updated" })
+    })
     .catch(err => res.status(500).end())
 })
 
 //Delete habit route
-router.delete('/:id', (req, res) => {
-    db.run(destroy, [req.params.id])
-        .then(res.status(204))
-        .catch(err => res.status(500).end())
+router.delete('/:userid/:id', (req, res) => {
+    db.run(deleteHabitInstance, [parseInt(req.params.id)])
+    db.run(deleteHabitOverview, [parseInt(req.params.id)])
+    .then(resp => {
+        res.status(204).json({ message: "Habit deleted"})
+    })
+    .catch(err => res.status(500).end())
 })
+
+
 
 
 module.exports = router;

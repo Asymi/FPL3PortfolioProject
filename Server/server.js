@@ -14,7 +14,7 @@ server.use(cookieParser());
 const port = 3000;
 
 const habitRoutes = require('./routes/habits');
-const auth = require('./auth/index')
+const auth = require('./auth/index');
 
 server.use('/habits', habitRoutes);
 server.use('/auth', auth);
