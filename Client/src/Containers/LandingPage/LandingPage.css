@@ -21,6 +21,12 @@
     letter-spacing: 0.1em;
 }
 
+#grid-item1 button  {
+    letter-spacing: 0.1em;
+    color: #fff;
+    background-color: transparent;
+}
+
 #grid-container :nth-child(even) {
     background-color: #ddd;
 }
