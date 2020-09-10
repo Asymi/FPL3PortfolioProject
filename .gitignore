@@ -3,3 +3,5 @@
 # dependenciesgit 
 /*/node_modules
 /Server/.env
+# Local Netlify folder
+.netlify
