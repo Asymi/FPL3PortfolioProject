@@ -22,7 +22,6 @@ class AddHabit extends Component {
         fetch('http://localhost:3000/habits/', options)
         .then(resp => this.setState({ data: [] }))
         .then(resp => this.props.closeModal())
-
     }
 
     handleInput = (e) => {

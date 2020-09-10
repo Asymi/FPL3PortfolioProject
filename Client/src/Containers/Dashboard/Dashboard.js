@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DisplayHabit from '../../Components/DisplayHabit/DisplayHabit';
+import Streak from '../../Components/Streak/Streak';
 import AddHabit from '../../Components/AddHabit/AddHabit';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
@@ -13,7 +14,9 @@ function Dashboard (props) {
                 <div className="Dashboard">
                     <h1>Hello Dashboard</h1>
                     <button onClick={()=>{setModalIsOpen(true)}}>+</button>
+
                     {props.habits ? props.habits.map((item, index) => (<DisplayHabit key={index} info={item}/>)) : "Loading habits..."}
+
                     <Modal isOpen={modalIsOpen} onRequestClose={()=>setModalIsOpen(false)}>
                         <h2>Modal up</h2>
                         <AddHabit closeModal={()=>setModalIsOpen(false)}/>

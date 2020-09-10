@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('../db/config');
-const { indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitOverview, deleteHabitInstance } = require('../db/queries');
+const { indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitOverview, deleteHabitInstance, getStreakByHabitId } = require('../db/queries');
 const { setInterval, dateArray } = require('./helpers')
 
 const router = express.Router();
@@ -101,6 +101,18 @@ router.delete('/:userid/:id', (req, res) => {
     .catch(err => res.status(500).end())
 })
 
+// Show longest streak 
+router.get('/streak/:id', (req, res) => {
+    db.run(getStreakByHabitId, [parseInt(req.params.id)])
+    .then(resp => {
+        // Ordered habit instances
+        const ordHabIns = resp.rows;
+        console.log(ordHabIns);
+        res.json({ordHabIns}).status(201)
+    })
+    .catch(err => res.status(500).end())
+})
+//SELECT * FROM habit_instance WHERE habit_instance.habit_id = $1 ORDER BY date ASC
 
 
 
