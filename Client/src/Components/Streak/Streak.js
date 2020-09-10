@@ -6,8 +6,7 @@ export class Streak extends Component {
     }
 
     componentDidMount(){
-        //fetch(`http://localhost:3000/habits/streak/${props.habitId}`)
-        fetch(`http://localhost:3000/habits/streak/3`)
+        fetch(`http://localhost:3000/habits/streak/${this.props.habitId}`)
         .then(resp => resp.json())
         .then(r => {
             console.log(r)
@@ -21,20 +20,21 @@ export class Streak extends Component {
     // {ordHabIns:[{"habitid":..., "date":..., "status":...},...,{...}]
     longestStreak = (obj) => {
         let temp;
-        let streak;
+        let streak=0;
         let longestStreak = 0;
         const arr = obj.ordHabIns
         const indexTrack = []
 
         console.log(arr)
         for(let i = 0; i < arr.length; i++){
-            if (temp !== undefined && temp === arr[i].status ){
-                streak++;
-            } else {
-                streak = 1;
-            }
-
             temp = arr[i].status;
+
+            if (temp !== undefined && temp ){
+                streak++;
+            }
+            // } else {
+            //     streak = 1;
+            // }
 
             if (streak > longestStreak){
                 longestStreak = streak;
