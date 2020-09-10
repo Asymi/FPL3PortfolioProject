@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import DisplayHabit from '../../Components/DisplayHabit/DisplayHabit';
 import Streak from '../../Components/Streak/Streak';
 import AddHabit from '../../Components/AddHabit/AddHabit';
@@ -14,8 +14,9 @@ function Dashboard (props) {
                 <div className="Dashboard">
                     <h1>Hello Dashboard</h1>
                     <button onClick={()=>{setModalIsOpen(true)}}>+</button>
-                    <DisplayHabit />
-                    <Streak />
+
+                    {props.habits ? props.habits.map((item, index) => (<DisplayHabit key={index} info={item}/>)) : "Loading habits..."}
+
                     <Modal isOpen={modalIsOpen} onRequestClose={()=>setModalIsOpen(false)}>
                         <h2>Modal up</h2>
                         <AddHabit closeModal={()=>setModalIsOpen(false)}/>
@@ -31,5 +32,9 @@ function Dashboard (props) {
     }
 }
 
-const mSTP = state => ({ userid: state.userid})
+const mSTP = state => ({ 
+    userid: state.userid,
+    habits: state.dailyHabits
+})
+
 export default connect(mSTP)(Dashboard)

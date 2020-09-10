@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './LandingPage.css';
 
 export class LandingPage extends Component {
@@ -30,8 +30,7 @@ export class LandingPage extends Component {
 				{/* Testimonials/reviews section with cards */}
                 <div id="grid-item4">
 
-        		</div>
-			
+                </div>
 				{/* Footer with contact information */}
                 <div id="grid-item5">
 
@@ -41,4 +40,4 @@ export class LandingPage extends Component {
     }
 }
 
-export default LandingPage
+export default LandingPage;
