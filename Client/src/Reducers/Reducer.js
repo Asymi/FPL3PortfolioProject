@@ -34,8 +34,10 @@ const Reducer = (state = initialState, action) => {
                 })
             })
         }
-        case 'DELETE_HABIT': 
+        case 'DELETE_HABIT':
             return {...state, dailyHabits: state.dailyHabits.filter((habit, index) => habit.habit_id !== action.payload.habit_id)}
+        case 'LOG_OUT':
+            return {...state, userid: '', dailyHabits: []}
         default:
             return state;
     }

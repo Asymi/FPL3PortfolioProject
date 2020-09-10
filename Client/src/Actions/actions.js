@@ -18,6 +18,10 @@ const addStreaks = streaks => ({
   payload: streaks
 })
 
+export const endSession = () => ({
+  type: 'LOG_OUT'
+})
+
 export const getHabits = info => {
   return async dispatch => {
     try {
@@ -88,7 +92,7 @@ const currentStreak = (obj) => {
   let temp;
   let currentStreak = 0;
   const arr = obj.ordHabIns
-  
+
   for(let i = 0; i < arr.length; i++){
       temp = arr[i].status;
 
@@ -105,7 +109,7 @@ const longestStreak = (obj) => {
   let temp;
   let streak;
   const arr = obj.ordHabIns;
- 
+
   for(let i = 0; i < arr.length; i++){
       if (temp !== undefined && temp === arr[i].status && arr[i].status === true){
           streak++;
@@ -113,7 +117,7 @@ const longestStreak = (obj) => {
           streak = 1;
       }
       temp = arr[i].status;
-      
+
   }
   return streak
 }
