@@ -25,6 +25,7 @@ router.post('/signup', (req, res, next) => {
                 .then(user => {
                   console.log(user.rows)
                   res.json({
+                    status: 201,
                     message: "✅"
                   })
                 })
