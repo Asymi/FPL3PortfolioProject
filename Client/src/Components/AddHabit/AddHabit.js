@@ -27,7 +27,6 @@ class AddHabit extends Component {
 
     handleInput = (e) => {
         let data = this.state.data;
-        console.log(e.target)
         data[e.target.name] = e.target.value
         this.setState({data})
     }

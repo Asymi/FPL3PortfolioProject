@@ -36,9 +36,9 @@ export class Signup extends Component {
           <div>
             <h1>Sign Up</h1>
             <form onSubmit={this.handleSubmit}>
-              <label for="username">Username</label>
+              <label htmlFor="username">Username</label>
                 <input type="text" name="username" onChange={this.handleInput} required></input><br/>
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
                 <input type="password" name="password" onChange={this.handleInput} required></input><br/>
                 <input type="submit" value="Sign Up"></input>
               </form>

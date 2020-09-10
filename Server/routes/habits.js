@@ -80,8 +80,11 @@ const popHabIns = (habitID, startDate, endDate, frequency) => {
 
 //Update a habit as completed
 router.put('/:userid/:id', (req,res) => {
-    db.run(update, [req.params.id, req.body.date])
+    const date = new Date().toISOString().slice(0, 10);
+
+    db.run(update, [req.params.id, date])
     .then(resp => {
+        res.send(resp)
         res.status(204).json({ message: "Habit updated" })
     })
     .catch(err => res.status(500).end())
@@ -92,6 +95,7 @@ router.delete('/:userid/:id', (req, res) => {
     db.run(deleteHabitInstance, [parseInt(req.params.id)])
     db.run(deleteHabitOverview, [parseInt(req.params.id)])
     .then(resp => {
+        res.send(resp.rows[0])
         res.status(204).json({ message: "Habit deleted"})
     })
     .catch(err => res.status(500).end())
