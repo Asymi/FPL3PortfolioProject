@@ -27,6 +27,9 @@ router.get('/:userid/show/:id', (req,res) => {
         .catch(err=> res.status(500).end())
 })
 
+router.get('/test', (req,res) => {
+    res.json({ message: "Response" })
+})
 
 //show habit by frequency route
 router.get('/:userid/daily', (req,res) => {

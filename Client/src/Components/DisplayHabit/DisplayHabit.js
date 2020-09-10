@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateStatus, destroyHabit } from '../../Actions/actions';
+import './DisplayHabit.css';
+
 
 export class DisplayHabit extends Component {
     updateStatus = () => {
@@ -11,10 +13,12 @@ export class DisplayHabit extends Component {
     }
     render() {
         return (
-            <div>
-              <p>{this.props.info.habit}</p>
-              <button onClick={this.updateStatus}>{this.props.info.status ? "Complete" : "Incomplete"}</button>
-              <button onClick={this.removeHabit}>Delete</button>
+            <div id="DisplayHabit">
+              <div id="habitBox">
+                <p id="habitName">{this.props.info.habit}</p>
+                <button id="statusbtn" onClick={this.updateStatus}>{this.props.info.status ? "Complete" : "Incomplete"}</button>
+                <button id="deletebtn" onClick={this.removeHabit}>Delete</button>
+              </div>
             </div>
         )
     }

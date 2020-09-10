@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './AddHabit.css';
+
 
 class AddHabit extends Component {
     state = {
@@ -40,7 +42,7 @@ class AddHabit extends Component {
                     <br/>
                     
                     <label htmlFor="frequency" id="frequency">Frequency</label><br/>
-                    <select name="frequency" defaultValue="" onChange={this.handleInput}>
+                    <select id="selectbox" name="frequency" defaultValue="" onChange={this.handleInput}>
                         {/* value={filterFreq} */}
                         <option value="" disabled>Select Frequency</option>
                         <option value="daily" >Daily</option>
@@ -50,13 +52,13 @@ class AddHabit extends Component {
                     <br/>
 
                     <label htmlFor="startdate">Start Date:</label><br/>
-                    <input type="date" id="startdate" name="startdate" placeholder="Date YYYY-MM-DD" onChange={this.handleInput}></input><br/>
+                    <input id="startdatebox" type="date" id="startdate" name="startdate" placeholder="Date YYYY-MM-DD" onChange={this.handleInput}></input><br/>
 
                     <label htmlFor="enddate">Until When?</label><br/>
-                    <input type="date" id="enddate" name="enddate" placeholder="Date YYYY-MM-DD" onChange={this.handleInput}></input><br/>
+                    <input id="enddatebox" type="date" id="enddate" name="enddate" placeholder="Date YYYY-MM-DD" onChange={this.handleInput}></input><br/>
                     <br/>
 
-                    <input type="submit"></input>
+                    <input id="submitbtn" type="submit"></input>
                 </form>
             </div>
         )

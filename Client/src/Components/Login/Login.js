@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import registerUser from '../../Actions/registerUser';
 import { getHabits } from '../../Actions/actions';
 import { connect } from 'react-redux';
+import './Login.css';
+
 
 export class Login extends Component {
     state = {
@@ -48,12 +50,12 @@ export class Login extends Component {
               <h1>Log In</h1>
               <form onSubmit={this.handleSubmit}>
 
-                <label htmlFor="username">Username</label>
-                  <input type="text" name="username" onChange={this.handleInput}></input><br/>
-                <label htmlFor="username">Password</label>
-                  <input type="password" name="password" onChange={this.handleInput}></input><br/>
+                <label htmlFor="username">Username</label><br/>
+                  <input  className="textbox" type="text" name="username" onChange={this.handleInput}></input><br/>
+                <label htmlFor="username">Password</label><br/>
+                  <input className="textbox" type="password" name="password" onChange={this.handleInput}></input><br/>
 
-                  <input type="submit"></input>
+                  <input className= "signupbtn" type="submit"></input>
                 </form>
             </div>
         )
