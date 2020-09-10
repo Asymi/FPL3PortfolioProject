@@ -21,6 +21,19 @@ const Reducer = (state = initialState, action) => {
                 })
             })
         }
+        case 'ADD_STREAKS': {
+            return Object.assign({}, state, {
+                dailyHabits : state.dailyHabits.map(habit => {
+                    if (habit.habit_id !== action.payload.habit_id) {
+                        return habit
+                    }
+                    return Object.assign({}, habit, {
+                        current: action.payload.current,
+                        longest: action.payload.longest
+                    })
+                })
+            })
+        }
         case 'DELETE_HABIT': 
             return {...state, dailyHabits: state.dailyHabits.filter((habit, index) => habit.habit_id !== action.payload.habit_id)}
         default:
