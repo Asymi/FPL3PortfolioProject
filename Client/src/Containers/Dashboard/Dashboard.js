@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import DisplayHabit from '../../Components/DisplayHabit/DisplayHabit';
-import Streak from '../../Components/Streak/Streak';
 import AddHabit from '../../Components/AddHabit/AddHabit';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';

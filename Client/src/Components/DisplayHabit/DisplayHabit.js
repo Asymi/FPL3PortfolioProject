@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateStatus, destroyHabit } from '../../Actions/actions';
+import Streak from '../Streak/Streak';
 
 export class DisplayHabit extends Component {
     updateStatus = () => {
@@ -13,6 +14,7 @@ export class DisplayHabit extends Component {
         return (
             <div>
               <p>{this.props.info.habit}</p>
+              <Streak habitId={this.props.info.habit_id} />
               <button onClick={this.updateStatus}>{this.props.info.status ? "Complete" : "Incomplete"}</button>
               <button onClick={this.removeHabit}>Delete</button>
             </div>
