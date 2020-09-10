@@ -24,7 +24,10 @@
 #grid-item1 button  {
     letter-spacing: 0.1em;
     color: #fff;
-    background-color: transparent;
+    /* background-color: transparent; */
+    border: none;
+    /* padding: 5% 5%;
+    margin:5% 5%; */
 }
 
 #grid-container :nth-child(even) {
