@@ -45,7 +45,7 @@ export class Signup extends Component {
                 <input className="signupbtn1" type="submit" value="Sign Up"></input>
               </form>
               <ul>
-                <li>Password must contain at least 6 characters</li>
+                {/* <li>Password must contain at least 6 characters</li> */}
               </ul>
           </div>
         )

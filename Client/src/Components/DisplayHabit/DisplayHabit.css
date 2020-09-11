@@ -63,3 +63,12 @@
 #deletebtn:focus  {
     outline:0;
 }
+
+#streaktext {
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #797a7e;
+    font-family: 'Montserrat', sans-serif;
+
+
+}

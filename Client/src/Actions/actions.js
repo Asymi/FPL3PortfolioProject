@@ -22,6 +22,11 @@ export const endSession = () => ({
   type: 'LOG_OUT'
 })
 
+const setAuth = (token) => ({
+  type: 'ADD_TOKEN',
+  payload: token
+})
+
 const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
 
 export const getHabits = info => {
@@ -36,6 +41,9 @@ export const getHabits = info => {
       const resp = await fetch(`${herokuURL}/habits/${info.user_id}/dashboard`, options)
       const habits = await resp.json()
       dispatch(fetchHabits(habits))
+      habits.habits.map(habit =>(dispatch(getStreaks(habit.habit_id))))
+      dispatch(setAuth(info.accessToken))
+
     } catch (err) {
       throw new Error(err.message)
     }

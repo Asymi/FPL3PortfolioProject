@@ -40,6 +40,8 @@ const Reducer = (state = initialState, action) => {
             return {...state, userid: '', dailyHabits: []}
         case 'ADD_HABIT':
             return {...state, dailyHabits: [state.dailyHabits, action.payload]}
+        case 'ADD_TOKEN':
+            return {...state, accessToken: action.payload}
         default:
             return state;
     }
