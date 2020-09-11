@@ -7,35 +7,41 @@ export class LandingPage extends Component {
         return (
             <div>
                 <header>
-                    <NavLink to="/signup"><button>Sign Up</button></NavLink>
-                    <NavLink to="/login"><button>Login</button></NavLink>
+                    {/* <NavLink to="/signup"><button>Sign Up</button></NavLink>
+                    <NavLink to="/login"><button>Login</button></NavLink> */}
                 </header>
                 <div id="grid-container">
+                    {/* Hero Section containing two buttons */}
+                    <div id="grid-item1">
 
-				</div>
-				{/* Hero Section containing two buttons */}
-                <div id="grid-item1">
-                    
-                </div>
-				{/* How it works section containing instructions */}
-                <div id="grid-item2">
+                        <p>Habit App</p>
+                         <NavLink to="/signup"><button>Sign Up</button></NavLink>
+                         <NavLink to="/login"><button>Login</button></NavLink>
+                    </div>
 
-				</div>
+                    {/* How it works section containing instructions */}
+                    <div id="grid-item2">
+                        <p>How it works</p>
+                    </div>
 
-				{/* Why it works section with statistics */}
-                <div id="grid-item3">
+                    {/* Why it works section with statistics */}
+                    <div id="grid-item3">
+                        <p>Why it works</p>
+                    </div>
 
-				</div>
+                    {/* Testimonials/reviews section with cards */}
+                    <div id="grid-item4">
+                        <p>Testimonials</p>
+                    </div>
 
-				{/* Testimonials/reviews section with cards */}
-                <div id="grid-item4">
+                    {/* Footer with contact information */}
+                    <div id="grid-item5">
+                          <p>Footer</p>
+                    </div>
 
-                </div>
-				{/* Footer with contact information */}
-                <div id="grid-item5">
-
-                </div>
-            </div>
+                </div> 
+                {/* End of Grid container */}
+        </div>
         )
     }
 }

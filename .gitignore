@@ -3,4 +3,5 @@
 # dependenciesgit 
 /*/node_modules
 /Server/.env
-/Server/db/config.js
+# Local Netlify folder
+.netlify
