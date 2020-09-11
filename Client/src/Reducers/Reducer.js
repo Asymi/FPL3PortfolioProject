@@ -7,7 +7,7 @@ const Reducer = (state = initialState, action) => {
     switch(action.type) {
         case 'REGISTER_USER':
             return {...state, userid: action.payload}
-        case 'ADD_HABITS':
+        case 'GET_HABITS':
             return {...state, dailyHabits: action.payload.habits}
         case 'UPDATE_STATUS': {
             return Object.assign({}, state, {
@@ -38,6 +38,8 @@ const Reducer = (state = initialState, action) => {
             return {...state, dailyHabits: state.dailyHabits.filter((habit, index) => habit.habit_id !== action.payload.habit_id)}
         case 'LOG_OUT':
             return {...state, userid: '', dailyHabits: []}
+        case 'ADD_HABIT':
+            return {...state, dailyHabits: [state.dailyHabits, action.payload]}
         default:
             return state;
     }

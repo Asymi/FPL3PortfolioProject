@@ -1,5 +1,5 @@
-const addHabits = habits => ({
-  type: 'ADD_HABITS',
+const fetchHabits = habits => ({
+  type: 'GET_HABITS',
   payload: habits
 })
 
@@ -33,7 +33,7 @@ export const getHabits = info => {
       }
       const resp = await fetch(`http://localhost:3000/habits/${info.user_id}/dashboard`, options)
       const habits = await resp.json()
-      dispatch(addHabits(habits))
+      dispatch(fetchHabits(habits))
     } catch (err) {
       throw new Error(err.message)
     }
@@ -82,6 +82,21 @@ export const getStreaks = habitId => {
       }
       dispatch(addStreaks(streaks))
       return streaks
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+}
+
+export const addHabit = data => {
+  return async dispatch => {
+    try {
+      const options = {
+          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          body: JSON.stringify(data)
+      }
+      const resp = await fetch(`http://localhost:3000/habits`, options)
     } catch (err) {
       throw new Error(err)
     }
