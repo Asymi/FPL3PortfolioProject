@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('../db/config');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 const { getUserByEmail, insertUser } = require('../db/queries');
 const { validateUser } = require('./helpers');
@@ -47,7 +48,9 @@ router.post('/login', (req, res, next) => {
           bcrypt.compare(req.body.password, resp.rows[0].password)
             .then((result) => {
               if(result) {
+                const Token = jwt.sign({name: req.body.username}, 'shhh', {expiresIn: '1h'})
                 res.json({
+                  accessToken: Token,
                   user_id: resp.rows[0].userid,
                   message: 'Logged in! :unlock:'
                 })
@@ -63,6 +66,5 @@ router.post('/login', (req, res, next) => {
     next(new Error('Invalid Login'))
   }
 })
-
 
 module.exports = router;
