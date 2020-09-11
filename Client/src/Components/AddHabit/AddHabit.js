@@ -20,7 +20,8 @@ class AddHabit extends Component {
             body: JSON.stringify(data)
         }
 
-        fetch('http://localhost:3000/habits/', options)
+        const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
+        fetch(`${herokuURL}/habits/`, options)
         .then(resp => this.setState({ data: [] }))
         .then(resp => this.props.closeModal())
     }

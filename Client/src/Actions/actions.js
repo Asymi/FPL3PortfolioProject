@@ -22,6 +22,8 @@ export const endSession = () => ({
   type: 'LOG_OUT'
 })
 
+const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
+
 export const getHabits = info => {
   return async dispatch => {
     try {
@@ -31,7 +33,7 @@ export const getHabits = info => {
           authorization: info.accessToken
         }
       }
-      const resp = await fetch(`http://localhost:3000/habits/${info.user_id}/dashboard`, options)
+      const resp = await fetch(`${herokuURL}/habits/${info.user_id}/dashboard`, options)
       const habits = await resp.json()
       dispatch(fetchHabits(habits))
     } catch (err) {
@@ -46,7 +48,7 @@ export const updateStatus = habitInfo => {
       const options = {
         method: "PUT"
       }
-      const resp = await fetch(`http://localhost:3000/habits/${habitInfo.userid}/${habitInfo.habit_id}`, options)
+      const resp = await fetch(`${herokuURL}/habits/${habitInfo.userid}/${habitInfo.habit_id}`, options)
       const update = await resp.json()
       dispatch(updateHabit(update.rows))
     } catch (err) {
@@ -61,7 +63,7 @@ export const destroyHabit = habitInfo => {
       const options = {
         method: "DELETE"
       }
-      const resp = await fetch(`http://localhost:3000/habits/${habitInfo.userid}/${habitInfo.habit_id}}`, options)
+      const resp = await fetch(`${herokuURL}/habits/${habitInfo.userid}/${habitInfo.habit_id}}`, options)
       const deleted = await resp.json()
       dispatch(deleteHabit(deleted))
     } catch (err) {
@@ -73,7 +75,7 @@ export const destroyHabit = habitInfo => {
 export const getStreaks = habitId => {
   return async dispatch => {
     try {
-      const resp = await fetch(`http://localhost:3000/habits/streak/${habitId}`)
+      const resp = await fetch(`${herokuURL}/habits/streak/${habitId}`)
       const streak = await resp.json()
       const streaks = {
         habit_id: habitId,
@@ -96,7 +98,7 @@ export const addHabit = data => {
           method: 'POST',
           body: JSON.stringify(data)
       }
-      const resp = await fetch(`http://localhost:3000/habits`, options)
+      const resp = await fetch(`${herokuURL}/habits`, options)
     } catch (err) {
       throw new Error(err)
     }

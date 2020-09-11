@@ -24,8 +24,9 @@ export class Signup extends Component {
       method: "POST",
       body: JSON.stringify(userData)
     }
-
-    fetch('http://localhost:3000/auth/signup', options)
+    
+    const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
+    fetch(`${herokuURL}/auth/signup`, options)
     .then(resp => resp.json())
     .then(resp => {
       if(resp.status === 201) {this.props.history.push('/login')}
