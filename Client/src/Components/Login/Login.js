@@ -30,7 +30,8 @@ export class Login extends Component {
             body: JSON.stringify(userData)
         }
 
-        fetch('http://localhost:3000/auth/login', options)
+        const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
+        fetch(`${herokuURL}/auth/login`, options)
         .then(resp => resp.json())
         .then(resp => {
             this.props.setUserId(resp.user_id)
