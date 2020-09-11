@@ -17,8 +17,8 @@ function Dashboard (props) {
         return (
                 <div className="Dashboard">
                     <div id="dashboardbg">
-                        <h1 id="dashboardTitle">Hello Dashboard</h1>
-                        <button onClick={logOut}>Log Out</button>
+                        <h1 id="dashboardTitle">Daily Dashboard</h1>
+                        <button button id="logbtn1" onClick={logOut}>Log Out</button>
                         <button id="addhabitbtn" onClick={()=>{setModalIsOpen(true)}}>+</button>
 
                         {props.habits ? props.habits.map((item, index) => (<DisplayHabit key={index} info={item}/>)) : "Loading habits..."}

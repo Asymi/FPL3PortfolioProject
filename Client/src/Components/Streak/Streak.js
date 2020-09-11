@@ -5,8 +5,8 @@ export class Streak extends Component {
     
     render() {
         return (
-            <div>
-                {this.props.info ? <p>Current: {this.props.info.current} Longest: {this.props.info.longest}</p> : "Loading streaks..."}
+            <div id="streaktext">
+                {this.props.info ? <p>Current Streak: {this.props.info.current} day(s) | Longest Streak: {this.props.info.longest} day(s)</p>  : "Loading streaks..."}
             </div>
         )
     }

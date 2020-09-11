@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './AddHabit.css';
+import { getHabits } from '../../Actions/actions';
 
 class AddHabit extends Component {
     state = {
@@ -19,11 +20,16 @@ class AddHabit extends Component {
             method: 'POST',
             body: JSON.stringify(data)
         }
+        const info ={
+            user_id: this.props.userid,
+            accessToken: this.props.token
+        }
 
         const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
         fetch(`${herokuURL}/habits/`, options)
         .then(resp => this.setState({ data: [] }))
         .then(resp => this.props.closeModal())
+        .then(() => this.props.fetchHabits(info))
     }
 
     handleInput = (e) => {
@@ -66,7 +72,11 @@ class AddHabit extends Component {
 }
 
 const mSTP = state => ({
-    userid: state.userid
+    userid: state.userid,
+    token: state.accessToken
 })
 
-export default connect(mSTP)(AddHabit)
+const mDTP = dispatch => ({
+    fetchHabits: (userid) => dispatch(getHabits(userid))
+})
+export default connect(mSTP, mDTP)(AddHabit)

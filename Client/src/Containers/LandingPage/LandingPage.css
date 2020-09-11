@@ -131,6 +131,8 @@
 
 .subText {
     letter-spacing: 0.05em;
+    margin: auto 30px;
+    justify-content: inter-character;
 }
 /** Why it works **/
 
