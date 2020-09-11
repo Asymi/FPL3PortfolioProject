@@ -2,13 +2,14 @@ const express = require('express');
 const db = require('../db/config');
 const jwt = require('jsonwebtoken');
 const { indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitOverview, deleteHabitInstance, getStreakByHabitId } = require('../db/queries');
-const { setInterval, dateArray } = require('./helpers')
+const { setInterval, dateArray } = require('./helpers');
+const { query } = require('express');
 
 const router = express.Router();
 
 router.get('/:userid/dashboard', authenticateToken, (req, res) => {
     const date = new Date().toISOString().slice(0, 10);
-   
+    
     db.run(indexForDay, [req.params.userid, date])
     .then(resp => {
         const habits = resp.rows
@@ -28,6 +29,9 @@ router.get('/:userid/show/:id', (req,res) => {
         .catch(err=> res.status(500).end())
 })
 
+router.get('/test', (req,res) => {
+    res.json({ message: "Response" })
+})
 
 //show habit by frequency route
 router.get('/:userid/daily', (req,res) => {
