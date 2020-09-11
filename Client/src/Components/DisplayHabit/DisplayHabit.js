@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateStatus, destroyHabit, getStreaks } from '../../Actions/actions';
 import Streak from '../Streak/Streak';
+import './DisplayHabit.css';
 
 export class DisplayHabit extends Component {
     componentDidMount(){
@@ -17,11 +18,13 @@ export class DisplayHabit extends Component {
 
     render() {
         return (
-            <div>
-              <p>{this.props.info.habit}</p>
-              <Streak info={this.props.info} />
-              <button onClick={this.updateStatus}>{this.props.info.status ? "Complete" : "Incomplete"}</button>
-              <button onClick={this.removeHabit}>Delete</button>
+            <div id="DisplayHabit">
+              <div id="habitBox">
+                <p id="habitName">{this.props.info.habit}</p>
+                <Streak info={this.props.info} />
+                <button id="statusbtn" onClick={this.updateStatus}>{this.props.info.status ? "Complete" : "Incomplete"}</button>
+                <button id="deletebtn" onClick={this.removeHabit}>Delete</button>
+              </div>
             </div>
         )
     }
