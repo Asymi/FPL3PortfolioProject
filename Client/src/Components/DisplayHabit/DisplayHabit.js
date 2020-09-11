@@ -5,9 +5,6 @@ import Streak from '../Streak/Streak';
 import './DisplayHabit.css';
 
 export class DisplayHabit extends Component {
-    componentDidMount(){
-      this.props.fetchStreaks(this.props.info.habit_id)
-    }
     updateStatus = () => {
       this.props.tickHabit(this.props.info)
       setTimeout(() => {this.props.fetchStreaks(this.props.info.habit_id)}, 1000)
@@ -22,7 +19,7 @@ export class DisplayHabit extends Component {
               <div id="habitBox">
                 <p id="habitName">{this.props.info.habit}</p>
                 <Streak info={this.props.info} />
-                <button id="statusbtn" onClick={this.updateStatus}>{this.props.info.status ? "Complete" : "Incomplete"}</button>
+                <button id="statusbtn" onClick={this.updateStatus}>{this.props.info.status ? "Habit Completed" : "Complete Habit"}</button>
                 <button id="deletebtn" onClick={this.removeHabit}>Delete</button>
               </div>
             </div>
