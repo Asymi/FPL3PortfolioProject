@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import registerUser from '../../Actions/registerUser';
 import { getHabits } from '../../Actions/actions';
 import { connect } from 'react-redux';
+import './Login.css';
+
 
 export class Login extends Component {
     state = {
@@ -28,11 +30,12 @@ export class Login extends Component {
             body: JSON.stringify(userData)
         }
 
-        fetch('http://localhost:3000/auth/login', options)
+        const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
+        fetch(`${herokuURL}/auth/login`, options)
         .then(resp => resp.json())
         .then(resp => {
             this.props.setUserId(resp.user_id)
-            this.props.fetchHabits(resp.user_id)
+            this.props.fetchHabits(resp)
             return resp})
         .then(data => {
             if(data.user_id){
@@ -48,12 +51,12 @@ export class Login extends Component {
               <h1>Log In</h1>
               <form onSubmit={this.handleSubmit}>
 
-                <label htmlFor="username">Username</label>
-                  <input type="text" name="username" onChange={this.handleInput}></input><br/>
-                <label htmlFor="username">Password</label>
-                  <input type="password" name="password" onChange={this.handleInput}></input><br/>
+                <label htmlFor="username">Username</label><br/>
+                  <input  className="textbox" type="text" name="username" onChange={this.handleInput}></input><br/>
+                <label htmlFor="username">Password</label><br/>
+                  <input className="textbox" type="password" name="password" onChange={this.handleInput}></input><br/>
 
-                  <input type="submit"></input>
+                  <input className= "signupbtn" type="submit"></input>
                 </form>
             </div>
         )

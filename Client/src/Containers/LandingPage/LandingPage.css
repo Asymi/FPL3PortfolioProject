@@ -5,34 +5,199 @@
 #grid-container{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 400px;
+    grid-template-rows: 500px 100px 300px 300px 180px 500px 200px;
     width: 100%;
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    color: rgb(100, 100, 100);
+    /* grid-row-gap: 20px; */
 }
 
+/** Hero Section **/
 #grid-item1 {
-    background-image: url("https://images.unsplash.com/photo-1533814241121-a93e5cd7399b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" );
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    display:grid;
+    grid-template-columns:1.5fr 2fr;
 }
 
-#grid-item1 p  {
-    letter-spacing: 0.1em;
-}
+/* #grid-item1 p  {
+    margin-top: 200px ;
+    letter-spacing: 0.2em;
+    font-weight: 800;
+} */
 
+
+/** Hero Buttons **/
 #grid-item1 button  {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
     color: #fff;
-    /* background-color: transparent; */
+    background-color: #d8d3cd;
     border: none;
-    /* padding: 5% 5%;
-    margin:5% 5%; */
+    margin: 10px 0px 10px -72px;
+    padding: 15px 30px;
+    border-radius: 5px;
+    width: 35%;
+    /* z-index: +1; */
+    font-size: 15px;
+    font-weight: 500;
+
 }
 
-#grid-container :nth-child(even) {
-    background-color: #ddd;
+#signbtn:hover  {
+    background-color: #c9d8ce;
 }
+
+#logbtn:hover  {
+    background-color: #a6b1e1;
+}
+
+#grid-item1 button:focus  {
+    outline:0;
+}
+
+
+#grid-item1-2 {
+    /* background-image: url("https://images.unsplash.com/photo-1533814241121-a93e5cd7399b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" ); */
+    background-image: url("https://static.dribbble.com/users/486498/screenshots/4953685/landingpage-.jpg" );
+
+    /* background-size: 100% 100%; */
+    background-repeat: no-repeat;
+    /* z-index: 0; */
+}
+
+/**  **/
+.sectiontitle {
+    font-family: sans-serif;
+    font-size: 30px;
+    line-height: 41px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #797a7e;
+    margin: 40px 0px 40px 0px
+    /* margin-top: 10px;
+    margin-bottom: 0; */
+}
+
+.herotitle {
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    font-size: 30px;
+    line-height: 41px;
+    font-weight: 700;
+    /* letter-spacing: 0.05em; */
+    /* color: rgb(102, 98, 98); */
+    color: rgb(180, 197, 253);
+    margin-top: 200px ;
+    letter-spacing: 0.2em;
+    font-weight: 800;
+    
+}
+
+/** How it works **/
+#grid-itemx {
+    /* background-color: #faf8f6; */
+
+}
+
+#grid-item2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 5px;
+    padding: 30px 0px 30px 0px;
+    /* background-color: #faf8f6; */
+
+
+}
+
+.subImage {
+    height: 180px;
+    width: 200px;
+}
+
+.subTitle {
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.quoteTitle {
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    margin: auto 20px;
+    justify-content: inter-word;
+    /* text-align: left; */
+}
+
+.subText {
+    letter-spacing: 0.05em;
+}
+/** Why it works **/
+
+#grid-item3 {
+    background-color:#faf8f6 ;
+    margin: 50px 0px 0px 0px;
+}
+
+
+#sub-Text3 {
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: left;
+    text-justify: inter-word;
+}
+
+
+/** Testimonials / Reviews **/
+
+#grid-item4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 30px;
+    /* justify-content: space-around;
+    justify-content: space-between; */
+    margin-bottom:0 ;
+    background-color:#faf8f6 ;
+
+}
+
+.stars {
+    width: 40%;
+}
+/**  **/
+/** Sign Up **/
+#grid-item5 {
+    background-color:rgb(180, 197, 253) ;
+    margin: 0;
+    color: #fff;
+}
+
+#grid-item5 h1 {
+    color: #fff;
+}
+
+
+/** Footer **/
+#grid-item6 {
+    background-color:#8d93ab ;
+
+}
+
+#grid-item6 a{
+    text-decoration: none;
+    color: black;
+}
+
+#grid-item6 p{
+    position: absolute;
+    right: 10px;
+    /* bottom: 8px; */
+    margin-top: 170px;
+    text-decoration: none;
+    color: black;
+}
+
 
 
 

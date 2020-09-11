@@ -25,6 +25,6 @@ const getUserByEmail = `SELECT * FROM users WHERE username = $1`;
 const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *`;
 
 // const streak = ;
-const getStreakByHabitId = `SELECT * FROM habit_instance WHERE habit_instance.habit_id = $1 ORDER BY date ASC`;
+const getStreakByHabitId = `SELECT * FROM habit_instance WHERE habit_instance.habit_id = $1 AND habit_instance.date <= TO_DATE($2,'YYYY-MM-DD') ORDER BY date ASC`;
 
 module.exports = {indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitInstance, deleteHabitOverview, getUserByEmail, insertUser, getStreakByHabitId};

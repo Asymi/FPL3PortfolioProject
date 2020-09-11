@@ -1,13 +1,15 @@
 const express = require('express');
 const db = require('../db/config');
+const jwt = require('jsonwebtoken');
 const { indexForDay, show, showByFrequency, createHabit, createHabitInstances, update, deleteHabitOverview, deleteHabitInstance, getStreakByHabitId } = require('../db/queries');
-const { setInterval, dateArray } = require('./helpers')
+const { setInterval, dateArray } = require('./helpers');
+const { query } = require('express');
 
 const router = express.Router();
 
-router.get('/:userid/dashboard', (req, res) => {
+router.get('/:userid/dashboard', authenticateToken, (req, res) => {
     const date = new Date().toISOString().slice(0, 10);
-   
+    
     db.run(indexForDay, [req.params.userid, date])
     .then(resp => {
         const habits = resp.rows
@@ -27,6 +29,9 @@ router.get('/:userid/show/:id', (req,res) => {
         .catch(err=> res.status(500).end())
 })
 
+router.get('/test', (req,res) => {
+    res.json({ message: "Response" })
+})
 
 //show habit by frequency route
 router.get('/:userid/daily', (req,res) => {
@@ -103,17 +108,32 @@ router.delete('/:userid/:id', (req, res) => {
 
 // Show longest streak 
 router.get('/streak/:id', (req, res) => {
-    db.run(getStreakByHabitId, [parseInt(req.params.id)])
+    const date = new Date().toISOString().slice(0, 10);
+
+    db.run(getStreakByHabitId, [parseInt(req.params.id), date])
     .then(resp => {
         // Ordered habit instances
         const ordHabIns = resp.rows;
-        console.log(ordHabIns);
         res.json({ordHabIns}).status(201)
     })
     .catch(err => res.status(500).end())
 })
 //SELECT * FROM habit_instance WHERE habit_instance.habit_id = $1 ORDER BY date ASC
 
+function authenticateToken (req, res, next) {
+    const authHeader = req.headers['authorization']
+    // console.log(req)
+    const token = authHeader 
+    // && authHeader.Split(' ')[1]
+    if (token==null) {
+        return res.sendStatus(401)
+    }
 
+    jwt.verify(token, 'shhh', (err, user) => {
+        if (err) {return res.sendStatus(403)}
+        req.user = user
+        next()
+    })
+}
 
 module.exports = router;

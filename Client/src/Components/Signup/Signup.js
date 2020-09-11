@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Signup.css';
 
 export class Signup extends Component {
   state = {
@@ -23,8 +24,9 @@ export class Signup extends Component {
       method: "POST",
       body: JSON.stringify(userData)
     }
-
-    fetch('http://localhost:3000/auth/signup', options)
+    
+    const herokuURL = 'https://enigmatic-atoll-01319.herokuapp.com'
+    fetch(`${herokuURL}/auth/signup`, options)
     .then(resp => resp.json())
     .then(resp => {
       if(resp.status === 201) {this.props.history.push('/login')}
@@ -34,13 +36,13 @@ export class Signup extends Component {
     render() {
         return (
           <div>
-            <h1>Sign Up</h1>
+            <h1 id="signupTitle">Sign Up</h1>
             <form onSubmit={this.handleSubmit}>
-              <label htmlFor="username">Username</label>
-                <input type="text" name="username" onChange={this.handleInput} required></input><br/>
-              <label htmlFor="password">Password</label>
-                <input type="password" name="password" onChange={this.handleInput} required></input><br/>
-                <input type="submit" value="Sign Up"></input>
+              <label htmlFor="username" >Username</label><br/>
+                <input className="textbox" placeholder="Username" type="text" name="username" onChange={this.handleInput} required></input><br/>
+              <label htmlFor="password">Password</label><br/>
+                <input className="textbox" placeholder="Password" type="password" name="password" onChange={this.handleInput} required></input><br/>
+                <input className="signupbtn1" type="submit" value="Sign Up"></input>
               </form>
               <ul>
                 <li>Password must contain at least 6 characters</li>
