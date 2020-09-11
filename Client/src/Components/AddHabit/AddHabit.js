@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './AddHabit.css';
 
-
 class AddHabit extends Component {
     state = {
         data: []
     }
-    
+
     handleSubmit = (e) => {
         e.preventDefault()
 
@@ -20,7 +19,7 @@ class AddHabit extends Component {
             method: 'POST',
             body: JSON.stringify(data)
         }
-        
+
         fetch('http://localhost:3000/habits/', options)
         .then(resp => this.setState({ data: [] }))
         .then(resp => this.props.closeModal())
@@ -31,7 +30,7 @@ class AddHabit extends Component {
         data[e.target.name] = e.target.value
         this.setState({data})
     }
-    
+
     render() {
         return (
             <div>
@@ -40,7 +39,7 @@ class AddHabit extends Component {
                     <label htmlFor="habit">Habit</label><br/>
                     <input type="text" id="habit" name="habit" placeholder="Please enter a habit" onChange={this.handleInput}></input><br/>
                     <br/>
-                    
+
                     <label htmlFor="frequency" id="frequency">Frequency</label><br/>
                     <select id="selectbox" name="frequency" defaultValue="" onChange={this.handleInput}>
                         {/* value={filterFreq} */}

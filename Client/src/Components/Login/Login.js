@@ -34,7 +34,7 @@ export class Login extends Component {
         .then(resp => resp.json())
         .then(resp => {
             this.props.setUserId(resp.user_id)
-            this.props.fetchHabits(resp.user_id)
+            this.props.fetchHabits(resp)
             return resp})
         .then(data => {
             if(data.user_id){
