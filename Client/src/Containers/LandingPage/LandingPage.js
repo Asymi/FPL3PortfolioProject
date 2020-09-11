@@ -17,7 +17,7 @@ export class LandingPage extends Component {
                     <div id="grid-item1">
 
                         <div id="grid-item1-1">
-                            <p className="herotitle">Habit App</p>
+                            <p className="herotitle">Hilbo Habbins</p>
                             <NavLink to="/signup"><button id="signbtn">Sign Up</button></NavLink>
                             <br/>
                             <NavLink to="/login"><button id="logbtn">Login</button></NavLink>
